@@ -24,17 +24,31 @@ function applyFilters() {
 </script>
 
 <template>
-    <div>
-        <input v-model="parameters.filters.email" placeholder="email" @change="applyFilters()">
-        <input v-model="parameters.filters.ingredient" placeholder="ingredient" @change="applyFilters()">
-        <input v-model="parameters.filters.keyword" placeholder="keyword" @change="applyFilters()">
+    <section>
+        <form @submit.prevent>
+            <div>
+                <label for="keyword">Keyword</label>
+                <input v-model="parameters.filters.keyword" id="keyword" @keyup.enter="applyFilters">
+            </div>
+            <div>
+                <label for="keyword">Email</label>
+                <input v-model="parameters.filters.email" id="email" @keyup.enter="applyFilters">
+            </div>
+            <div>
+                <label for="keyword">Ingredient</label>
+                <input v-model="parameters.filters.ingredient" id="ingredient" @keyup.enter="applyFilters">
+            </div>
+            <div>
+                <button @click="applyFilters">Search</button>
+            </div>
+        </form>
         <table>
             <thead>
             <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>author</th>
-                <th>description</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Description</th>
             </tr>
             </thead>
             <tbody>
@@ -48,11 +62,43 @@ function applyFilters() {
             </tr>
             </tbody>
         </table>
-        <div>
-            <template v-for="link in links">
-                <NuxtLink v-if="link.url" :to="link.url" v-html="link.label"/>
-                <span v-else v-html="link.label"/>
-            </template>
-        </div>
-    </div>
+        <nav>
+            <ul>
+                <li v-for="link in links">
+                    <NuxtLink v-if="link.url && !link.active" :to="link.url" v-html="link.label"/>
+                    <span v-else v-html="link.label"/>
+                </li>
+            </ul>
+        </nav>
+    </section>
 </template>
+
+<style scoped>
+form {
+    border: 0;
+    box-shadow: 0 0 0 0;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    gap: 0 2rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+button {
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 800px) {
+    form {
+        flex-direction: column;
+    }
+}
+
+table, tbody, thead, tr, th, td {
+    width: 100%;
+}
+</style>
