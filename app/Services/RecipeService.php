@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services;
 
 use App\Models\Recipe;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class RecipeRepository
+class RecipeService
 {
-    public function filteredPaginatedRecipes(): LengthAwarePaginator
+    public function recipesForIndex()
     {
         return QueryBuilder::for(Recipe::class)
             ->allowedFilters([
@@ -17,6 +16,7 @@ class RecipeRepository
                 AllowedFilter::scope('keyword', 'whereKeyword'),
                 AllowedFilter::scope('ingredient', 'whereHasIngredient'),
             ])
-            ->jsonPaginate();
+            ->jsonPaginate()
+            ->setPath(route('recipes.index', [], false));
     }
 }
