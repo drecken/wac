@@ -2,6 +2,12 @@ export const usePaginationStore = defineStore('pagination', () => {
 
     const links = ref([] as Link[])
 
+    const meta = ref({
+        from: null,
+        to: null,
+        total: 0,
+    } as Meta)
+
     function setLinks(newLinks: []) {
         links.value = []
         newLinks.forEach((link: any) => {
@@ -16,12 +22,18 @@ export const usePaginationStore = defineStore('pagination', () => {
         return decodeURI(url.replace(/^\/api/, ''))
     }
 
-    return {links, setLinks}
+    return {links, meta, setLinks}
 })
 
 interface Link {
     url: string | null,
     label: string,
     active: boolean,
+}
+
+interface Meta {
+    from: number | null,
+    to: number | null,
+    total: number,
 }
 

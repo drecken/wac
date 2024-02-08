@@ -14,14 +14,17 @@ export const useRecipeStore = defineStore('recipe', () => {
     } as Recipe)
 
     async function fetchAll() {
-        const results = await $fetch('http://localhost:8888/api/recipes', {params: parametersStore.queryParameters})
+        const results = await $fetch(useRuntimeConfig().public.apiBase + '/recipes', {params: parametersStore.queryParameters})
         recipes.value = results.data
         const paginationStore = usePaginationStore()
         paginationStore.setLinks(results.meta.links)
+        paginationStore.meta.from = results.meta.from
+        paginationStore.meta.to = results.meta.to
+        paginationStore.meta.total = results.meta.total
     }
 
     async function fetch(slug: string) {
-        const results = await $fetch(`http://localhost:8888/api/recipes/${slug}`)
+        const results = await $fetch(useRuntimeConfig().public.apiBase + `/recipes/${slug}`)
         recipe.value = results.data
     }
 

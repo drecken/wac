@@ -6,7 +6,7 @@ const paginationStore = usePaginationStore()
 const parametersStore = useRecipeQueryParametersStore()
 
 const {parameters} = storeToRefs(parametersStore)
-const {links} = storeToRefs(paginationStore)
+const {links, meta} = storeToRefs(paginationStore)
 const {recipes} = storeToRefs(recipeStore)
 
 parametersStore.loadFromUrlQueryString()
@@ -61,6 +61,18 @@ function applyFilters() {
                 <td>{{ recipe.description }}</td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <p v-if="meta.total > 0">
+                        Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} results.
+                    </p>
+                    <p v-else>
+                        No results.
+                    </p>
+                </td>
+            </tr>
+            </tfoot>
         </table>
         <nav>
             <ul>
