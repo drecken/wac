@@ -18,9 +18,10 @@ class IngredientFactory extends Factory
     public function definition(): array
     {
         $methodName = Arr::random(['dairyName', 'vegetableName', 'fruitName', 'meatName', 'sauceName']);
+        $ingredient = $this->faker->{$methodName}();
 
         return [
-            'name' => $this->faker->{$methodName}(),
+            'name' => $ingredient = $ingredient === 'Potato' ? 'Ziemniak' : $ingredient,
         ];
     }
 }
