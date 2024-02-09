@@ -10,7 +10,7 @@ sh scripts/build.sh
 
 This script should end with passing all the PHPUnit tests
 
-> Note: the command for running frontend differs depending if we are running it for testing `npm run test` or for
+> the command for running frontend differs depending if we are running it for testing `npm run test` or for
 > browsing `npm run dev`
 
 ## Test
@@ -23,16 +23,21 @@ This script should end with passing all the PHPUnit tests
 
 ### Dusk
 
+> **start the frontend server for _dusk tests_ in another terminal**
+
 ```
 ./vendor/bin/sail npm run test --prefix frontend
+```
+
+then continue with
+
+```
 sh scripts/dusk.sh
 ```
 
-> Note: **starts the frontend server for _dusk tests_**
+check `tests/Browser/screenshots` for some screenshots
 
-check `tests/Browser/screenshots`
-
-on Windows:
+on Windows you can use
 
 ```
 explorer.exe `wslpath -w "$PWD"./tests/Browser/screenshots/`
@@ -40,11 +45,13 @@ explorer.exe `wslpath -w "$PWD"./tests/Browser/screenshots/`
 
 ### Frontend
 
+> Make sure the backend server is not running
+
+> **start the frontend server for _host_ [browsing](http://localhost:3000/recipes)**
+
 ```
 ./vendor/bin/sail npm run dev --prefix frontend
  ```
-
-> **starts the frontend server for _host_ [browsing](http://localhost:3000/recipes)**
 
 ## Seed
 
@@ -54,13 +61,13 @@ Testing data
 ./vendor/bin/sail artisan db:seed --class=TestRecipesSeeder
  ```
 
-creates a recipe with 2-5 ingredients & 3-8 steps
+Recipe with 2-5 ingredients & 3-8 steps
 
 ```
 ./vendor/bin/sail artisan db:seed --class=RecipeSeeder
 ```
 
-create 10 recipes
+10 recipes
 
 ```
 ./vendor/bin/sail artisan db:seed
