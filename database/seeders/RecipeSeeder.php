@@ -2,20 +2,19 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Recipe;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class RecipeSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        Recipe::factory(10)
+        Recipe::factory()
             ->hasIngredients(rand(2, 5))
-            ->hasSteps(rand(3, 6))
+            ->hasSteps(rand(3, 8))
             ->create();
     }
 }
