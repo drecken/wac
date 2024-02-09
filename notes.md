@@ -2,9 +2,11 @@
 
 ## Build
 
-1. `git clone git@github.com:drecken/wac.git`
-2. `cd wac`
-3. `sh scripts/build.sh`
+```
+git clone git@github.com:drecken/wac.git
+cd wac
+sh scripts/build.sh
+```
 
 This script should end with passing all the PHPUnit tests
 
@@ -15,33 +17,62 @@ This script should end with passing all the PHPUnit tests
 
 ### PHPUnit
 
-`./vendor/bin/sail test`
+```
+./vendor/bin/sail test
+```
 
 ### Dusk
 
-1. `./vendor/bin/sail npm run test --prefix frontend` - **starts the frontend server for _dusk tests_**
-2. `sh scripts/dusk.sh`
+```
+./vendor/bin/sail npm run test --prefix frontend
+sh scripts/dusk.sh
+```
+
+> Note: **starts the frontend server for _dusk tests_**
 
 check `tests/Browser/screenshots`
 
+on Windows:
+
+```
+explorer.exe `wslpath -w "$PWD"./tests/Browser/screenshots/`
+```
+
 ### Frontend
 
-`./vendor/bin/sail npm run dev --prefix frontend` - **starts the frontend server
-for _host_ [browsing](http://localhost:3000/recipes)**
+```
+./vendor/bin/sail npm run dev --prefix frontend
+ ```
+
+> **starts the frontend server for _host_ [browsing](http://localhost:3000/recipes)**
 
 ## Seed
 
-- `./vendor/bin/sail artisan db:seed --class=TestRecipesSeeder` to seed with testing data
-- `./vendor/bin/sail artisan db:seed --class=RecipeSeeder` creates a recipe with 2-5 ingredients & 3-8 steps
-- `./vendor/bin/sail artisan db:seed` to create 10 recipes
+Testing data
+
+```
+./vendor/bin/sail artisan db:seed --class=TestRecipesSeeder
+ ```
+
+creates a recipe with 2-5 ingredients & 3-8 steps
+
+```
+./vendor/bin/sail artisan db:seed --class=RecipeSeeder
+```
+
+create 10 recipes
+
+```
+./vendor/bin/sail artisan db:seed
+```
 
 # Packages Used
 
 - [jzonta/faker-restaurant](https://github.com/jzonta/FakerRestaurant) - recipe & ingredient names
-- [spatie/eloquent-sortable](https://github.com/spatie/eloquent-sortable)- steps ordering
+- [spatie/eloquent-sortable](https://github.com/spatie/eloquent-sortable) - steps ordering
 - [spatie/laravel-sluggable](https://github.com/spatie/laravel-sluggable) - recipe slug generation
 - [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) - JSON:API query parameters
-- [spatie/laravel-json-api-paginate](https://github.com/spatie/laravel-json-api-paginate)- JSON:API pagination
+- [spatie/laravel-json-api-paginate](https://github.com/spatie/laravel-json-api-paginate) - JSON:API pagination
 
 # Notes
 
