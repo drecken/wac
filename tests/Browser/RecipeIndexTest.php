@@ -62,6 +62,7 @@ class RecipeIndexTest extends DuskTestCase
                 ->assertSee('No results.')
                 ->screenshot('recipe-email-exact-search-p1')
                 ->keys('#email', 'm', '{enter}')
+                ->pause(200)
                 ->assertSee('Showing 1 to 10 of 11 results.')
                 ->screenshot('recipe-email-exact-search-p2');
         });
