@@ -1,6 +1,7 @@
 #!/bin/bash
 docker run --rm \
     --pull=always \
+    -u "$(id -u):$(id -g)" \
     -v "$(pwd)":/opt \
     -w /opt \
     laravelsail/php82-composer:latest \
